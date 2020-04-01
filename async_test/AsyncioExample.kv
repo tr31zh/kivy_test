@@ -1,0 +1,17 @@
+#:kivy 1.11.1
+
+<RootLayout>:
+    orientation: 'vertical'
+    Button:
+        id: btn
+        text: 'Start EventLoop thread.'
+        on_press: app.start_event_loop_thread()
+    TextInput:
+        multiline: False
+        size_hint_y: 0.25
+        on_text: app.submit_pulse_text(args[1])
+    BoxLayout:
+        Label:
+            id: pulse_listener    
+        Label:
+            id: status

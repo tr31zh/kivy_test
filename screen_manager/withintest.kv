@@ -1,0 +1,44 @@
+#:kivy 1.11.1
+
+<RootWidget>:
+    orientation: "vertical"
+    Header:
+        id: header
+    MainWindowManager:
+        id: main_window_manager
+    Footer:
+        id: footer
+
+<Header>:
+    orientation: "horizontal"
+    Label:
+        id: lbl_header
+        text: "Header"
+
+<Footer>:
+    orientation: "horizontal"
+    Label:
+        id: lbl_footer
+        text: "Footer"
+
+<MainWindowManager>:
+    PageOne:
+        id: page_one
+    PageTwo:
+        id: page_two
+
+<PageOne>:
+    orientation: "horizontal"
+    Label:
+        text: "Page One"
+    Button:
+        text: "Got to page"
+        on_press: root.manager.current = "page_two"
+
+<PageTwo>:
+    orientation: "horizontal"
+    Label:
+        text: "Page Two"
+    Button:
+        text: "Got to page"
+        on_press: root.manager.current = "page_two"

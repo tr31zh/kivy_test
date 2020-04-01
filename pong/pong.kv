@@ -1,19 +1,67 @@
 #:kivy 1.11.1
 
-<PongGame>:    
+<PongBall>:
+    size: 50, 50 
     canvas:
+        Color: 
+            rgba: 1, 0, 1, 1
+        Ellipse:
+            pos: self.pos
+            size: self.size
+
+<PongPaddle>:
+    size: 25, 200
+    canvas:
+        Color: 
+            rgba: 0, 1, 0, 1
         Rectangle:
-            pos: self.center_x - 5, 0
-            size: 10, self.height
-            
+            pos:self.pos
+            size:self.size
+
+<PongGame>:
+    ball: pong_ball
+    player1: player_left
+    player2: player_right
+    
+    canvas:
+        Color: 
+            rgba: 1, 1, 1, 0.5
+        Rectangle:
+            pos: self.center_x - root.band_width / 2, 0
+            size: root.band_width, self.height
+        Color: 
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: 0, 0
+            size: self.width, root.band_width
+        Color: 
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: 0, self.height -10
+            size: self.width, root.band_width
+    
     Label:
         font_size: 70  
         center_x: root.width / 4
         top: root.top - 50
-        text: "0"
-
+        text: str(root.player1.score) if root.player1.score < root.max_score else "Player 1 wins"
+        
     Label:
         font_size: 70  
         center_x: root.width * 3 / 4
         top: root.top - 50
-        text: "0"
+        text: str(root.player2.score) if root.player2.score < root.max_score else "Player 2 wins"
+    
+    PongBall:
+        id: pong_ball
+        center: self.parent.center
+        
+    PongPaddle:
+        id: player_left
+        x: root.x + root.width / 10
+        center_y: root.center_y
+        
+    PongPaddle:
+        id: player_right
+        x: root.width - root.width / 10 - self.width
+        center_y: root.center_y
